@@ -157,7 +157,7 @@ color_names = \
      'darkgrey', 'mediumgrey', 'lightgrey']
 
 #Train a 20x30 SOM with 400 iterations
-som = SOM(20, 30, 3, 4000)
+som = SOM(20, 30, 3, 40)
 som.train(colors)
 
 #Get output grid
