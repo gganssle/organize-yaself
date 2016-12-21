@@ -15,10 +15,34 @@ import numpy as np
 import tensorflow as tf
 
 #### 2D output / 1D input example #####################################################
-
+'''
 ns = 4
 dim = 3
 
+m = 8
+n = 9
+
+temp = np.zeros((ns,dim))
+for i in range(ns):
+	for j in range(dim):
+		temp[i,j] = i*10 + j
+
+#print('original = \n', temp, '\n')
+
+weights = tf.random_normal([m*n, dim])
+inp = tf.constant(temp[0], dtype=tf.float32)
+
+bmuIdx = tf.argmin(tf.sqrt(tf.reduce_sum(tf.pow(tf.sub(weights, tf.pack([inp for i in range(m*n)])), 2), 1)), 0)
+
+#sess = tf.Session()
+#output = sess.run(bmuIdx)
+#print(output)
+'''
+### 3D output / 1D input example #####################################################
+ns = 4
+dim = 3
+
+l = 7
 m = 8
 n = 9
 
@@ -68,10 +92,20 @@ output = sess.run(bmuIdx)
 print(output)
 '''
 ### slice stuff #################################################################
+locs = tf.constant(np.array(list(self.neuron_locations(l, m, n)))) #this is in 3D. The above this is running 2D output. Must fix
+
 slce = tf.pad(tf.reshape(bmuIdx, [1]), np.array([[0,1]]))
 
-bmu_loc = tf.reshape(tf.slice(self._location_vects, slce, tf.constant(np.array([1, 2]))), [2])
+bmu_loc = tf.reshape(tf.slice(locs, slce, tf.constant(np.array([1, 2]))), [2])
 
 sess = tf.Session()
-output = sess.run(bmuIdx)
+output = sess.run(slce)
 print(output)
+
+
+### neuron locations class ######################################################
+def _neuron_locations(l, m, n):
+	for k in range(l):
+		for i in range(m):
+			for j in range(n):
+				yield np.array([k, i, j])
