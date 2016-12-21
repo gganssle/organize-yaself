@@ -149,7 +149,7 @@ color_names = \
      'cyan', 'violet', 'yellow', 'white',
      'darkgrey', 'mediumgrey', 'lightgrey']
  
-som = SOM(20, 30, 3, 400)
+som = SOM(10, 20, 30, 3, 400)
 som.train(colors)
  
 image_grid = som.get_centroids()
@@ -162,3 +162,4 @@ for i, m in enumerate(mapped):
     plt.text(m[1], m[0], color_names[i], ha='center', va='center',
              bbox=dict(facecolor='white', alpha=0.5, lw=0))
 plt.show()
+
