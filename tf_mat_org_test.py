@@ -39,7 +39,7 @@ bmuIdx = tf.argmin(tf.sqrt(tf.reduce_sum(tf.pow(tf.sub(weights, tf.pack([inp for
 #print(output)
 
 ### 3D output / 3D input example #####################################################
-
+'''
 ns = 4
 nx = 5
 ny = 5
@@ -62,6 +62,15 @@ weights = tf.random_normal([l*m*n, dim])
 inp = tf.constant(temp[:,0,0,0], dtype=tf.float32)
 
 bmuIdx = tf.argmin(tf.sqrt(tf.reduce_sum(tf.pow(tf.sub(weights, tf.pack([inp for i in range(l*m*n)])), 2), 1)), 0)
+
+sess = tf.Session()
+output = sess.run(bmuIdx)
+print(output)
+'''
+### slice stuff #################################################################
+slce = tf.pad(tf.reshape(bmuIdx, [1]), np.array([[0,1]]))
+
+bmu_loc = tf.reshape(tf.slice(self._location_vects, slce, tf.constant(np.array([1, 2]))), [2])
 
 sess = tf.Session()
 output = sess.run(bmuIdx)
