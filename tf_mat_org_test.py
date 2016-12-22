@@ -9,6 +9,9 @@ tf.pow(tf.sub(self._weightage_vects, tf.pack(
 RESULTS in above: 2 = the exp for tf.pow, 
                   1 = sum across the RGB channels, 
                   0 = min index across the 1D (0th dimension) vector
+
+Hey also, these are just notes, so none of this stuff runs together or anything like that. I'm just using pieces of this script in various situations.
+
 '''
 
 import numpy as np
@@ -53,10 +56,10 @@ for i in range(ns):
 
 #print('original = \n', temp, '\n')
 
-weights = tf.random_normal([m*n, dim])
+weights = tf.random_normal([l*m*n, dim])
 inp = tf.constant(temp[0], dtype=tf.float32)
 
-bmuIdx = tf.argmin(tf.sqrt(tf.reduce_sum(tf.pow(tf.sub(weights, tf.pack([inp for i in range(m*n)])), 2), 1)), 0)
+bmuIdx = tf.argmin(tf.sqrt(tf.reduce_sum(tf.pow(tf.sub(weights, tf.pack([inp for i in range(l*m*n)])), 2), 1)), 0)
 
 #sess = tf.Session()
 #output = sess.run(bmuIdx)
@@ -91,8 +94,17 @@ sess = tf.Session()
 output = sess.run(bmuIdx)
 print(output)
 '''
+
+### neuron locations class ######################################################
+def neuron_locations(l, m, n):
+	for k in range(l):
+		for i in range(m):
+			for j in range(n):
+				yield np.array([k, i, j])
+
 ### slice stuff #################################################################
-locs = tf.constant(np.array(list(self.neuron_locations(l, m, n)))) #this is in 3D. The above this is running 2D output. Must fix
+''' nextt thing to do it to test this bmu_loc with the 2d output and compare to see why it's messed up in the 3d scenario'''
+locs = tf.constant(np.array(list(neuron_locations(l, m, n))))
 
 slce = tf.pad(tf.reshape(bmuIdx, [1]), np.array([[0,1]]))
 
@@ -103,9 +115,3 @@ output = sess.run(slce)
 print(output)
 
 
-### neuron locations class ######################################################
-def _neuron_locations(l, m, n):
-	for k in range(l):
-		for i in range(m):
-			for j in range(n):
-				yield np.array([k, i, j])
