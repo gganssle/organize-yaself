@@ -89,13 +89,23 @@ class SOM(object):
                                feed_dict={self._vect_input: input_vect,
                                           self._iter_input: iter_no})
  
+        ''' this is the original stuff
         centroid_grid = [[] for i in range(self._m)]
         self._weightages = list(self._sess.run(self._weightage_vects))
         self._locations = list(self._sess.run(self._location_vects))
         for i, loc in enumerate(self._locations):
             centroid_grid[loc[0]].append(self._weightages[i])
         self._centroid_grid = centroid_grid
- 
+        '''
+        centroid_grid = np.zeros((self._l, self._m, self._n))
+        self._weightages = list(self._sess.run(self._weightage_vects))
+        self._locations = list(self._sess.run(self._location_vects))
+        for k in range(self._l):
+            for i in range(self._m):
+                for j in range(self._n):
+                    centroid_grid[k,i,j].append(self._weightages[j + (i * self._n) + (k * self._n * self._m)])
+        self._centroid_grid = centroid_grid
+
         self._trained = True
  
     def get_centroids(self):
@@ -148,10 +158,11 @@ image_grid = som.get_centroids()
  
 mapped = som.map_vects(colors)
 
-plt.imshow(image_grid)
-plt.title('Color SOM')
-for i, m in enumerate(mapped):
-    plt.text(m[1], m[0], color_names[i], ha='center', va='center',
-             bbox=dict(facecolor='white', alpha=0.5, lw=0))
-plt.show()
+print(image_grid)
+#plt.imshow(image_grid)
+#plt.title('Color SOM')
+#for i, m in enumerate(mapped):
+#    plt.text(m[1], m[0], color_names[i], ha='center', va='center',
+#             bbox=dict(facecolor='white', alpha=0.5, lw=0))
+#plt.show()
 
