@@ -43,29 +43,21 @@ class SOM(object):
             slice_input = tf.pad(tf.reshape(bmu_index, [1]),
                                  np.array([[0, 1]]))
             bmu_loc = tf.reshape(tf.slice(self._location_vects, slice_input,
-                                          tf.constant(np.array([1, 2]))),
-                                 [2])
+                                          tf.constant(np.array([1, 3]))),
+                                 [3])
  
             learning_rate_op = tf.sub(1.0, tf.div(self._iter_input,
                                                   self._n_iterations))
             _alpha_op = tf.mul(alpha, learning_rate_op)
             _sigma_op = tf.mul(sigma, learning_rate_op)
 
-
-            print('\n--------------------------------\n')
-
-
             bmu_distance_squares = tf.reduce_sum(tf.pow(tf.sub(
                 self._location_vects, tf.pack(
                     [bmu_loc for i in range(l*m*n)])), 2), 1)
-            print('\nxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\n')
+
             neighbourhood_func = tf.exp(tf.neg(tf.div(tf.cast(
                 bmu_distance_squares, "float32"), tf.pow(_sigma_op, 2))))
             learning_rate_op = tf.mul(_alpha_op, neighbourhood_func)
-
-
-            print('\n++++++++++++++++++++++++++++\n')
-
 
             learning_rate_multiplier = tf.pack([tf.tile(tf.slice(
                 learning_rate_op, np.array([i]), np.array([1])), [dim])
@@ -81,7 +73,7 @@ class SOM(object):
  
             self._sess = tf.Session()
  
-            init_op = tf.initialize_all_variables()
+            init_op = tf.global_variables_initializer()
             self._sess.run(init_op)
  
     def _neuron_locations(self, l, m, n):
@@ -149,13 +141,13 @@ color_names = \
      'cyan', 'violet', 'yellow', 'white',
      'darkgrey', 'mediumgrey', 'lightgrey']
  
-som = SOM(10, 20, 30, 3, 400)
+som = SOM(10, 20, 30, 3, 2)
 som.train(colors)
- 
+
 image_grid = som.get_centroids()
  
 mapped = som.map_vects(colors)
- 
+
 plt.imshow(image_grid)
 plt.title('Color SOM')
 for i, m in enumerate(mapped):
