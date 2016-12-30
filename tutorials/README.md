@@ -1,0 +1,1 @@
+<a href="https://codesachin.wordpress.com/2015/11/28/self-organizing-maps-with-googles-tensorflow/">Here's</a> the awesome article by Sachin Joglekar about building SOMs in <a href="https://tensorflow.org">Tensorflow</a>. His work is reproduced here with his permission. Enjoy.

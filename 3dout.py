@@ -1,5 +1,6 @@
 '''
-This code is adapted from https://codesachin.wordpress.com/2015/11/28/self-organizing-maps-with-googles-tensorflow/
+This is a SOM which produces a 3D map output. This is to be further generalized to
+nD output where n=the number of rock properties in the prototype vectors.
 '''
 
 import tensorflow as tf
