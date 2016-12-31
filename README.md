@@ -6,7 +6,7 @@ Here's a little repo for testing out some ideas about self organizing maps I saw
 <li><a href="http://library.seg.org/doi/abs/10.1190/segam2015-5924540.1">Zhao, et al. "Supervised and unsupervised learning: how machines can assist quantitative seismic interpretation"</a>
 </ul>
 
-<a href="https://codesachin.wordpress.com/2015/11/28/self-organizing-maps-with-googles-tensorflow/">Here's</a> the awesome article by Sachin Joglekar about building SOMs in <a href="https://tensorflow.org">Tensorflow</a>. His work is reproduced here with his permission in several of my scripts. Enjoy.
+<a href="https://codesachin.wordpress.com/2015/11/28/self-organizing-maps-with-googles-tensorflow/">Here's</a> the awesome article by Sachin Joglekar about building SOMs in <a href="https://tensorflow.org">Tensorflow</a>. His work is adapted here with his permission in several of my scripts. Enjoy.
 
 Another color clustering <a href="https://github.com/spiglerg/Kohonen_SOM_Tensorflow">example</a> by spiglerg. This one trains on GPU.
 
@@ -20,3 +20,5 @@ Notes on the plan going forward (20161227):
 <li>The modeling algo's the key. The color SOM in this repo can be adapted with an nD output.
 <li>Do I need shot gathers or image gathers for classification (assuming only PP response)? Image; though it'll lack perfect amp response, the energy mispositioning pre-mig will certainly screw up the classification.
 </ul>
+
+Herein lies a script hacked from <a href="https://agilescientific.com/">Agile Scientific</a> which queries the <a href="http://www.subsurfwiki.org/wiki/Special:Ask">Rock Properties Catalog</a>. It's licensed under the <a href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0</a>.
