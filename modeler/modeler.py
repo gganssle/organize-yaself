@@ -34,11 +34,9 @@ def aki(thta, vp1, vs1, ro1, vp2, vs2, ro2):
 
 	k = (vs1 / vp1)**2
 
-	'''r = (1/2)*((dvp/vp1)+(dro/ro1)) + \
+	r = (1/2)*((dvp/vp1)+(dro/ro1)) + \
 		((1/2)*(dvp/vp1) - 2 * k * (2*(dvs/vs1)+(dro/ro1))) * math.sin(rad)**2 + \
 		(1/2) * (dvp/vp1) * (math.tan(rad)**2 - math.sin(rad)**2)
-'''
-	r = (1/2) * (dvp/vp1) * (math.tan(rad)**2 - math.sin(rad)**2)
 
 	return r
 

@@ -72,11 +72,3 @@ class RPC(object):
             print("Something went wrong.")
         
 
-rpc = RPC()
-
-filters = ["[[lithology::Shale||Sandstone||Limestone]][[Delta::%2B]]"]
-properties = ['Citation', 'Description', 'Lithology', 'Vp', 'Vs', 'Rho', 'Delta', 'Epsilon']
-options = ["limit=100"]
-
-df = rpc.query(filters, properties, options)
-df.head()
