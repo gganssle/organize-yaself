@@ -1,0 +1,1 @@
+This folder contains the script for building feature vectors out of a seismic trace. This certainly isn't robust, I just wanted to get any data into a post stack SOM to get the mechanics right for the prestack version.

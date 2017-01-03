@@ -1,0 +1,1 @@
+This folder contains a bunch of prototype vectors for SOM. They were built by modeling seismic data from rock properties using the Aki-Richards equation. <a href="../modeler/run.py">Here's</a> the script for building new ones, which is based on <a href="../modeler/modeler.py">this</a> function.
