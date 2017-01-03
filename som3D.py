@@ -1,6 +1,7 @@
 '''
 This is a SOM which produces a 3D map output. This is to be further generalized to
-nD output where n=the number of rock properties in the prototype vectors.
+nD output where n=the number of rock properties in the prototype vectors. Right
+now (20170103) I'm using this for poststack (ha) data varied on Vp, Vs, and rho.
 '''
 
 import tensorflow as tf
@@ -121,44 +122,4 @@ class SOM(object):
             to_return.append(self._locations[min_index])
  
         return to_return
-
-###########################################################################
-from matplotlib import pyplot as plt
- 
-colors = np.array(
-     [[0., 0., 0.],
-      [0., 0., 1.],
-      [0., 0., 0.5],
-      [0.125, 0.529, 1.0],
-      [0.33, 0.4, 0.67],
-      [0.6, 0.5, 1.0],
-      [0., 1., 0.],
-      [1., 0., 0.],
-      [0., 1., 1.],
-      [1., 0., 1.],
-      [1., 1., 0.],
-      [1., 1., 1.],
-      [.33, .33, .33],
-      [.5, .5, .5],
-      [.66, .66, .66]])
-color_names = \
-    ['black', 'blue', 'darkblue', 'skyblue',
-     'greyblue', 'lilac', 'green', 'red',
-     'cyan', 'violet', 'yellow', 'white',
-     'darkgrey', 'mediumgrey', 'lightgrey']
- 
-som = SOM(10, 20, 30, 3, 2)
-som.train(colors)
-
-image_grid = som.get_centroids()
- 
-mapped = som.map_vects(colors)
-
-print(image_grid.shape)
-plt.imshow(image_grid[1,:,:,:])
-plt.title('Color SOM')
-for i, m in enumerate(mapped):
-    plt.text(m[1], m[0], color_names[i], ha='center', va='center',
-             bbox=dict(facecolor='white', alpha=0.5, lw=0))
-plt.show()
 
