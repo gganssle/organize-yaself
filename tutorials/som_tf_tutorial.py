@@ -232,9 +232,11 @@ color_names = \
 #Train a 20x30 SOM with 400 iterations
 som = SOM(20, 30, 3, 400)
 som.train(colors)
- 
+
 #Get output grid
 image_grid = som.get_centroids()
+
+print(image_grid.shape)
  
 #Map colours to their closest neurons
 mapped = som.map_vects(colors)
