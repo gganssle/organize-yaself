@@ -236,8 +236,6 @@ som.train(colors)
 #Get output grid
 image_grid = som.get_centroids()
 
-print(image_grid.shape)
- 
 #Map colours to their closest neurons
 mapped = som.map_vects(colors)
  
